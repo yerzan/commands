@@ -1,0 +1,62 @@
+5.1 przywrocenie zawartosci pliku(niedodanedo do przechowalni) do wersji z ostatniego commita (discard changes):
+git restore
+
+usuniecie wersji pliku dodanego do przechowalni (unstage):
+git restore --staged
+
+5.2  git commit --amend -m "...":  pozwala na zmianę ostatniego commita i przypisanie mu nowej wiadomości. 
+Po jej wykonaniu, Git nadpisuje poprzedni commit nowym, 
+który zawiera zmiany wprowadzone w plikach oraz nową wiadomość commitową, którą podasz po -m
+
+git commit --amend --no-edit :Ta komenda jest używana, gdy chcesz zmienić ostatni commit, 
+ale nie zmieniać jego wiadomości. Zamiast tego, Git po prostu nadpisuje poprzedni commit wprowadzonymi zmianami w plikach,
+ ale wiadomość commita pozostaje taka sama.
+ 
+ 5.3 git stash: zapisuje wszystkie zmiany w katalogu roboczym i w staging area (czyli pliki zmodyfikowane i dodane do indeksu), 
+ a następnie przywraca repozytorium do stanu czystego, jakbyś nie wprowadzał żadnych zmian. 
+  Zmiany są zapisywane w specjalnym obszarze pamięci Git i mogą być później przywrócone (np. na innej gałęzi).
+  
+ git stash -u  – zapisuje zmiany w plikach śledzonych i niesledzonych (new files, np. nowych plikach, 
+ które jeszcze nie zostały dodane do indeksu).
+ 
+git stash -a  – zapisuje także zmiany w plikach ignorowanych przez .gitignore.
+
+git stash pop – przywraca zmiany ze stasha i usuwa je z listy przechowywanych zmian (stash).
+
+git stash apply – przywraca zmiany ze stasha, ale nie usuwa ich z listy (możesz je ponownie przywrócić później).
+
+5.4 Komenda   git merge    w systemie kontroli wersji Git jest używana do łączenia dwóch gałęzi w jedno. 
+Umożliwia to zintegrowanie zmian z jednej gałęzi (np. z gałęzi roboczej) do innej (np. głównej gałęzi, jak main lub master).
+ Celem użycia git merge jest scalenie historii commitów z dwóch gałęzi w jeden spójny ciąg.
+ 
+ 5.5 Komenda    git rebase    w Git służy do przenoszenia lub przekształcania historii commitów w gałęzi,
+ pozwalając na bardziej linearną historię projektu.
+ Rebase jest jednym z dwóch głównych sposobów łączenia gałęzi w Git (obok git merge), 
+ ale działa w sposób, który zmienia historię commitów.
+
+
+5.6 Komenda git reset --soft HEAD^ cofa ostatni commit, ale zachowuje zarówno zmiany w staging area (indeksie), jak i w plikach roboczych (working directory). Jest to najmniej destrukcyjny tryb resetowania w Git.
+
+5.7 Komenda git reset --mixed HEAD^ jest używana w systemie kontroli wersji Git do cofnięcia ostatniego commitu, z jednoczesnym zachowaniem zmian w plikach w obszarze roboczym (working directory) i usunięciem ich z indeksu (staging area).
+
+5.8 Komenda git reset --hard HEAD^ cofa ostatni commit i usuwa wszystkie zmiany wprowadzone w tym commicie zarówno z indeksu (staging area), jak i z katalogu roboczego (working directory). Jest to najbardziej destrukcyjny tryb resetowania w Git.
+
+5.9 Komenda git rebase -i HEAD~2 w połączeniu z opcją squash (lub jej skrótem s) pozwala na połączenie dwóch ostatnich commitów w jeden. Jest to przydatne do "czyszczenia" historii commitów i łączenia mniejszych, powiązanych commitów w większe, bardziej znaczące jednostki.
+
+5.10 Komenda git checkout hash_commita służy do przejścia do konkretnego commita na podstawie jego skróconego lub pełnego hasha. Jest to sposób na przeglądanie stanu repozytorium w momencie, gdy dany commit został utworzony.
+
+5.11 git branch -d (delikatne usunięcie gałęzi)
+Służy do usunięcia lokalnej gałęzi, ale tylko jeśli została już w pełni zintegrowana (połączona) z inną gałęzią (np. main lub develop).
+Jeśli gałąź zawiera unikalne commity (czyli takie, które nie zostały zmergowane), Git wyświetli ostrzeżenie i nie pozwoli na jej usunięcie.
+
+ git branch -D (wymuszone usunięcie gałęzi)
+To wersja "brutalna", która usuwa lokalną gałąź bez względu na jej stan.
+Używa się jej, gdy chcesz usunąć gałąź, nawet jeśli nie została jeszcze zmergowana lub zawiera unikalne commity.
+Nie można cofnąć usunięcia gałęzi, chyba że odtworzysz ją z refloga lub pamiętasz hash commitów.
+
+5.12 Komenda git revert służy do odwrócenia skutków danego commita, przy jednoczesnym zachowaniu historii repozytorium. Jest to sposób na cofnięcie zmian wprowadzonego commita poprzez utworzenie nowego commita, który odwraca wcześniejsze zmiany.
+
+5.13 Komenda git rm służy do usuwania plików z repozytorium Git, podczas gdy git rm --cached usuwa pliki z indeksu (staging area) bez usuwania ich z systemu plików.
+
+5.14 Komenda git archive służy do tworzenia archiwów (np. w formacie .zip lub .tar) zawierających pliki z konkretnego commita lub gałęzi repozytorium. Dzięki temu możesz łatwo wygenerować pakiet kodu źródłowego bez historii Git, co jest przydatne przy dystrybucji kodu.
+
